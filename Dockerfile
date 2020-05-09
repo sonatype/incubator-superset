@@ -117,6 +117,8 @@ FROM lean AS dev
 COPY ./requirements-dev.txt ./docker/requirements* /app/
 
 USER root
+# jdillon: databricks-dbapi support
+RUN apt-get update -y && apt-get install -y libsasl2-dev
 RUN cd /app \
     && pip install --no-cache -r requirements-dev.txt -r requirements-extra.txt \
     && pip install --no-cache -r requirements-local.txt || true
